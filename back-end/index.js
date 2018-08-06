@@ -21,4 +21,5 @@ app.use(cookieSession({
 const homeController = require('./controllers/home-controller')
 app.use('/', homeController)
 
-app.listen(3000)
+const env = require('./env')
+app.listen(env.connection.port || 3000)
