@@ -9,27 +9,40 @@ const Joke = require('../models/joke-model')
 // GET / Get all jokes.
 router.get('/', async (req, res) => {
     const jokes = await Joke.filteredFind({})
-    res.json(jokes)
+
+    res.json({
+        type:  'success',
+        value: jokes,
+    })
 })
 
 // POST / Add new joke.
 router.post('/', async (req, res) => {
     const joke = new Joke({
-        message: req.body.message
+        joke: req.body.joke
     })
     
     const data = await joke.save()
-    res.json(data)
+    res.json({
+        type:  'success',
+        value: data,
+    })
 })
 
 // GET /:id Get joke by id.
 router.get('/:id', async (req, res) => {
     try {
         const joke = await Joke.filteredFindById(req.params.id)
-        res.json(joke)
+        res.json({
+            type:  'success',
+            value: joke,
+        })
     } catch(err) {
         res.status(404)
-        res.send('NOT FOUND')
+        res.json({
+            type:  'not found',
+            value: 'not found',
+        })
     }
 })
 
@@ -39,10 +52,16 @@ router.delete('/:id', async (req, res) => {
         await Joke.softDelete({
             _id: req.params.id
         })
-        res.send('DELETED')
+        res.json({
+            type:  'success',
+            value: 'deleted',
+        })
     } catch(err) {
         res.status(404)
-        res.send('NOT FOUND')
+        res.json({
+            type:  'not found',
+            value: 'not found',
+        })
     }
 })
 
@@ -59,15 +78,24 @@ router.post('/:id/like', async (req, res) => {
         if(!like) {
             joke.likes.push(req.session.user_id)
         } else {
-            res.send('EXISTING LIKE')
+            res.json({
+                type:  'existing like',
+                value: 'existing like',
+            })
         }
 
         joke.dislikes = joke.dislikes.filter(id => id !== req.session.user_id)
         await joke.save()
-        res.json(joke)
+        res.json({
+            type:  'success',
+            value: joke,
+        })
     } catch(err) {
         res.status(404)
-        res.send('NOT FOUND')
+        res.json({
+            type:  'not found',
+            value: 'not found',
+        })
     }
 })
 
@@ -84,15 +112,24 @@ router.post('/:id/dislike', async (req, res) => {
         if(!dislike) {
             joke.dislikes.push(req.session.user_id)
         } else {
-            res.send('EXISTING DISLIKE')
+            res.json({
+                type:  'existing dislike',
+                value: 'existing dislike',
+            })
         }
 
         joke.likes = joke.likes.filter(id => id !== req.session.user_id)
         await joke.save()
-        res.json(joke)
+        res.json({
+            type:  'success',
+            value: joke,
+        })
     } catch(err) {
         res.status(404)
-        res.send('NOT FOUND')
+        res.json({
+            type:  'not found',
+            value: 'not found',
+        })
     }
 })
 
@@ -102,7 +139,10 @@ router.post('/reset', (req, res) => {
         delete req.session.user_id
     }
 
-    res.send('SUCCESS')
+    res.json({
+        type:  'success',
+        value: 'success',
+    })
 })
 
 module.exports = router
