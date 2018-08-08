@@ -1,9 +1,9 @@
 const mongoose = require('mongoose')
 const env      = require('../env')
 
-const connectDatabase = _ => {
+const connectDatabase = () => {
     mongoose.connect(`mongodb://${env.database.username}:${env.database.password}@${env.database.host}:27017/${env.database.database}`, { useNewUrlParser: true })
-        .then(_ => {
+        .then(() => {
             console.log('Database connection successful')
         })
         .catch(err => {

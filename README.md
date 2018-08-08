@@ -35,11 +35,21 @@ In case you don't know who the heck is Chuck Norris. See his statement.
 
 1. Please explain a situation that using Redux to manage application state is more helpful than original React's state.
 
+    __ANSWER__: Redux is going to be considered to be used, when there are a lot of components which need to manage other component's state and the application needs to have global state as well. Bacause Redux allows developers to manage global state. So, developers will no longer need to pass props from component to its child component and pass to its child of child component, again and again, like a props chain.
+
 2. Why do we need "Server-Side Rendering". Please explain.
+
+    __ANSWER__: There are many benefits from applying Server-Side Rendering technique to a web application. 
+    - The first one is decreasing client-side loads because most of the necessary data will be prepared on the server-side. It means that users will see the necessary data at the same time the first response received.
+    - The second one is Server-Side Rendering provides ability to apply an SEO(Search Engine Optimization) to the website. Because, search engines often track the data from websites before the websites will render DOM layer. So, without SSR and the website needs to fetch some data using client-side JavaScript, the search engines will hardly track the data we want people to use as keywords.
 
 3. Explain the differences of `null` and `undefined`
 
+    __ANSWER__: `null` is value assigned by programmers and never be assigned by JavaScript. It's often used to represent the nonexistence of variables. On the other hand, `undefined` can be assigned by JavaScript when variable is declared without being assignd any value to it. Moreover, the types of them are not the same. For `null`, its type is `object` but the type of `undefined` is `undefined`. By the way, both of them are considered as the same value, if they are compared by using the equality (`==`) operator. But for the identity (`===`) operator, they are not the same.
+
 4. Tell us the benefit of using ESLint.
+
+    __ANSWER__: ESLint improves code quality in many ways, including it makes the code more clean and increases readability to the code. a developer who didn't write the code will easily understand the code in a short time. It also provides the standard to the developer team to follow. they will have the same standard and understand what other developer wrote. And ESLint also finds the syntax errors before the code is executed and finds unused variables as well.
 
 ## Back-End
 
