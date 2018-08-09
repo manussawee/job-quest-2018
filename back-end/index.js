@@ -17,6 +17,11 @@ app.use(cookieSession({
     maxAge: 60 * 60 * 1000 // 1 hour
 }))
 
+// use anti spamming
+const antiSpamming = require('./config/anti-spam')
+antiSpamming.start()
+app.use(antiSpamming.middleware)
+
 // get and use controllers
 const homeController = require('./controllers/home-controller')
 app.use('/', homeController)
