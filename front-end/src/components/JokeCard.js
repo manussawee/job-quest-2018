@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import styled from 'styled-components'
 
-import { addJoke, removeJoke } from '../actions'
+import { addJoke, removeJoke, selectJoke, changePage } from '../actions'
 
 const JokeCardContainer = styled.div`
     box-shadow:    0px 1px 4px #d1d1d1;
@@ -16,7 +16,8 @@ const JokeCardContainer = styled.div`
 `
 
 const SettingContainer = styled.div`
-    float: right;
+    display: flex;
+    float:   right;
 `
 
 const TagContainer = styled.div`
@@ -25,10 +26,11 @@ const TagContainer = styled.div`
     margin-top: 4px;
 `
 
-const BookmarkContainer = styled.div`
+const IconContainer = styled.div`
     color:        #1f8fdf;
     cursor:       pointer;
     font-size:    18px;
+    margin-left:  2px;
     padding-left: 8px;
     transition:   color 0.35s;
 
@@ -38,25 +40,29 @@ const BookmarkContainer = styled.div`
 `
 
 const JokeCard = ({
-    type,
-    joke,
     add,
+    exportJoke,
+    joke,
     remove,
+    type,
 }) => (
     <JokeCardContainer>
         <SettingContainer>
-        {
-            type === 'unsaved' &&
-            <BookmarkContainer onClick={add}>
-                <i className="far fa-bookmark"></i>
-            </BookmarkContainer>
-        }
-        {
-            type === 'saved' &&
-            <BookmarkContainer onClick={remove}>
-                <i className="fas fa-bookmark"></i>
-            </BookmarkContainer>
-        }
+            <IconContainer onClick={exportJoke}>
+                <i className="far fa-file-image"></i>
+            </IconContainer>
+            {
+                type === 'unsaved' &&
+                <IconContainer onClick={add}>
+                    <i className="far fa-bookmark"></i>
+                </IconContainer>
+            }
+            {
+                type === 'saved' &&
+                <IconContainer onClick={remove}>
+                    <i className="fas fa-bookmark"></i>
+                </IconContainer>
+            }
         </SettingContainer>
 
         <div>{joke.joke}</div>
@@ -75,8 +81,12 @@ const mapStatetoProps = (state, ownProps) => ({
 })
 
 const mapDispatchToProps = (dispatch, ownProps) => ({
-    add:    () => dispatch(addJoke(ownProps.joke)),
-    remove: () => dispatch(removeJoke(ownProps.joke.id)),
+    add:        () => dispatch(addJoke(ownProps.joke)),
+    remove:     () => dispatch(removeJoke(ownProps.joke.id)),
+    exportJoke: () => {
+        dispatch(changePage('export'))
+        dispatch(selectJoke(ownProps.joke))
+    },
 })
 
 export default connect(

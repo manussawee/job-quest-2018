@@ -17,8 +17,9 @@ const NavBarContainer = styled.div`
 
 const NavBar = () => (
 	<NavBarContainer>
-		<PageButton page="home">home</PageButton>
+		<PageButton page="home">Home</PageButton>
 		<PageButton page="my_jokes">My Jokes</PageButton>
+		<PageButton page="export">Export</PageButton>
 	</NavBarContainer>
 )
 

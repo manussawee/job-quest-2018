@@ -12,3 +12,8 @@ export const removeJoke = id => ({
     type: 'REMOVE_JOKE',
     id,
 })
+
+export const selectJoke = joke => ({
+    type: 'SELECT_JOKE',
+    joke,
+})

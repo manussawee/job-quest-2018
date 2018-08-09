@@ -45,10 +45,15 @@ const Button = styled.button`
     outline:          none;
     padding:          8px;
     text-transform:   uppercase;
-    transition:       background-color 0.35s;
+    transition:       box-shadow 0.35s;
+
+    :hover {
+        box-shadow: 0px 2px 6px gray;
+    }
 
     :active {
         background-color: #1f8fdf;
+        box-shadow: none;
     }
 `
 

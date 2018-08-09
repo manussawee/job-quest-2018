@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 import Home from './Home'
 import MyJokes from './MyJokes'
+import Export from './Export'
 
 const ContentContainer = styled.div`
 	box-shadow:    0px 1px 4px #d1d1d1;
@@ -16,6 +17,7 @@ const Content = ({ page }) => (
     <ContentContainer>
         {page === 'home'     && <Home />}
         {page === 'my_jokes' && <MyJokes />}
+        {page === 'export'   && <Export />}
     </ContentContainer>
 )
 
